@@ -40,9 +40,8 @@ addLayer("p", {
             description: "Lands boost Point gain.",
             cost: new Decimal(5),
 
-            effect() {
-                return player[this.layer].points.add(3).pow(0.562)
-            },
+            effect(){return player.points.add(3).pow(0.562).div(50).log(10).add(1).times(50)},
+
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
         },
 
@@ -51,9 +50,9 @@ addLayer("p", {
             description: "Points boost themself",
             cost: new Decimal(5),
 
-            effect() {
-                return player.points.add(1).pow(0.15)
-            },
+
+            effect(){return player.points.add(1).log(10).add(1)},
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
 
         },
 
@@ -99,40 +98,4 @@ addLayer("P", {
     },
 
     layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
-})  
-
-addLayer("a", {
-    startData() { return {                  // startData is a function that returns default data for a layer. 
-        unlocked: false,                     // You can add more variables here to add them to your layer.
-        points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
-    }},
-
-    color: "#4BDC13",                       // The color for this layer, which affects many elements.
-    resource: "Achievements",            // The name of this layer's main prestige resource.
-    row: side,                                 // The row this layer is on (0 is the first row).
-
-    baseResource: "Achievements",                 // The name of the resource your prestige gain is based on.
-    baseAmount() { return player.p.points },  // A function to return the current amount of baseResource.
-
-    requires: new Decimal(10),              // The amount of the base needed to  gain 1 of the prestige currency.
-                                            // Also the amount required to unlock the layer.
-
-    type: "normal",                         // Determines the formula used for calculating prestige currency.
-    exponent: 0.5,                          // "normal" prestige gain is (currency^exponent).
-
-    gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
-        return new Decimal(1)               // Factor in any bonuses multiplying gain here.
-    },
-    gainExp() {                             // Returns the exponent to your gain of the prestige resource.
-        return new Decimal(1)
-    },
-
-    layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
-
-    achievements: {
-        11: {
-            name: "Blah",
-        },
-        etc
-    }
 })  
