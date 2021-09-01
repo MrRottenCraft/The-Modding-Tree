@@ -40,7 +40,8 @@ addLayer("p", {
             description: "Lands boost Point gain.",
             cost: new Decimal(5),
 
-            effect() {return player.points.add(3).pow(0.562)},
+            effect(){if(player.points.gte(50)) return player.points.add(3).pow(0.562).div(50).log(10).add(1).times(50).min(50)
+                else return player.points.add(3).pow(0.562) },
 
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
         },
