@@ -74,14 +74,14 @@ addLayer("p", {
     },
 }),
 
-addLayer("a", {
+addLayer("r", {
     startData() { return {                  // startData is a function that returns default data for a layer. 
         unlocked: false,                     // You can add more variables here to add them to your layer.
-        prestigepoints: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
+        points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
     }},
 
     color: "#4BDC13",                       // The color for this layer, which affects many elements.
-    resource: "a",            // The name of this layer's main prestige resource.
+    resource: "Rubens",            // The name of this layer's main prestige resource.
     row: 1,                                 // The row this layer is on (0 is the first row).
 
     baseResource: "prestige points",                 // The name of the resource your prestige gain is based on.
