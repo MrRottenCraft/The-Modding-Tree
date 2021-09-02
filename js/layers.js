@@ -1,6 +1,6 @@
 addLayer("p", {
-    name: "Rubens", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "R", // This appears on the layer's node. Default is the id with the first letter capitalized
+    name: "lubens", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "L", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
@@ -8,7 +8,7 @@ addLayer("p", {
     }},
     color: "#blue",
     requires: new Decimal(5), // Can be a function that takes requirement increases into account
-    resource: "Rubens", // Name of prestige currency
+    resource: "Lubens", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -41,7 +41,9 @@ addLayer("p", {
             cost: new Decimal(5),
 
             effect(){if(player.points.gte(50)) return player.points.add(3).pow(0.562).div(50).log(10).add(1).times(50).min(50)
-                else return player.points.add(3).pow(0.562) },
+                else return player.points.add(3).pow(0.562) 
+            },
+
 
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
         },
@@ -49,7 +51,7 @@ addLayer("p", {
         13: {
             name: "3",
             description: "Points boost themself",
-            cost: new Decimal(5),
+            cost: new Decimal(20),
 
 
             effect(){return player.points.add(1).log(10).add(1)},
@@ -85,7 +87,7 @@ addLayer("P", {
     baseResource: "Rubens",                 // The name of the resource your prestige gain is based on.
     baseAmount() { return player.p.points },  // A function to return the current amount of baseResource.
 
-    requires: new Decimal(100000),              // The amount of the base needed to  gain 1 of the prestige currency.
+    requires: new Decimal(1000),              // The amount of the base needed to  gain 1 of the prestige currency.
                                             // Also the amount required to unlock the layer.
 
     type: "normal",                         // Determines the formula used for calculating prestige currency.
