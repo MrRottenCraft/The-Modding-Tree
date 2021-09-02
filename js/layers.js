@@ -40,8 +40,9 @@ addLayer("p", {
             description: "Lands boost Point gain.",
             cost: new Decimal(5),
 
-            effect(){if(player.points.gte(50)) return player.points.add(3).pow(0.562).div(50).log(10).add(1).times(50).min(50)
-                else return player.points.add(3).pow(0.562) 
+            effect(){if(player.points.gte(1000)) return player.points.add(3).pow(0.562).div(1000).add(1).log(10).times(50).min(1000)
+                if(hasUpgrade('p',15))return player.points.add(1).pow(0.5).times(upgradeEffect('p',15))
+                else return player.points.add(3).pow(0.562)
             },
 
 
@@ -71,6 +72,15 @@ addLayer("p", {
 
         },
 
+        15: {
+            name: "5",
+            description: "Points boost Rubens gain.",
+            cost: new Decimal(321),
+
+            effect(){return player.points.add(1).add(1).log(10)},
+
+        },
+
     },
 }),
 
@@ -87,11 +97,11 @@ addLayer("r", {
     baseResource: "prestige points",                 // The name of the resource your prestige gain is based on.
     baseAmount() { return player.p.points },  // A function to return the current amount of baseResource.
 
-    requires: new Decimal(100),              // The amount of the base needed to  gain 1 of the prestige currency.
+    requires: new Decimal(10),              // The amount of the base needed to  gain 1 of the prestige currency.
                                             // Also the amount required to unlock the layer.
 
     type: "static",                         // Determines the formula used for calculating prestige currency.
-    exponent: 0.5,                          // "normal" prestige gain is (currency^exponent).
+    exponent: 3.25,
 
     gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
         return new Decimal(1)               // Factor in any bonuses multiplying gain here.
