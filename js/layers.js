@@ -40,9 +40,8 @@ addLayer("p", {
             description: "Lands boost Point gain.",
             cost: new Decimal(5),
 
-            effect(){if(player.points.gte(1000)) return player.points.add(3).pow(0.562).div(1000).add(1).log(10).times(50).min(1000)
-                if(hasUpgrade('p',15))return player.points.add(1).pow(0.5).times(upgradeEffect('p',15))
-                else return player.points.add(3).pow(0.562)
+            effect() {if(hasUpgrade('p',15))return player.points.add(3).pow(0.562).times(upgradeEffect('p',15)).min(1000)
+                else return player.points.add(3).pow(0.222).min(1000)
             },
 
 
@@ -55,7 +54,10 @@ addLayer("p", {
             cost: new Decimal(20),
 
 
-            effect(){return player.points.add(1).log(10).add(1)},
+           
+            effect() {if(hasUpgrade('p',15))return player.points.add(3).pow(0.562).times(upgradeEffect('p',15)).min(30)
+                else return player.points.add(0.2).pow(0.15).min(30)
+            },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
 
         },
